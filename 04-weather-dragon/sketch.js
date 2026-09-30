@@ -15,7 +15,7 @@ function checkWeather() {
 
   // ── CHECK FOR SECRET CITIES FIRST ──
   if (city === "dragon")   { resultEl.textContent = "🐉 100% chance of fire. Avoid."; triggerCreature("dragon");   return; }
-  if (city === "penguins") { resultEl.textContent = "🐧 2°C. Very slippery.";        triggerCreature("penguins"); return; }
+  if (city === "penguins" || city === "penguin") { resultEl.textContent = "🐧 2°C. Very slippery.";        triggerCreature("penguins"); return; }
   if (city === "cloud")    { resultEl.textContent = "☁️ 1000% clouds. Hydrate.";     triggerCreature("cloud");    return; }
 
   // Normal lookup
@@ -36,12 +36,20 @@ function triggerCreature(type) {
   activeCreature = type;
   creatureX = -100;
   creatureTimer = 0;
+  showCanvas();   // reveal canvas so the creature is visible
 }
 
 function setup() {
-  createCanvas(600, 300);
-//  canvas.position(0, 0).style("margin-top", "12px");
+  createCanvas(windowWidth, 300);
 }
+
+function windowResized() {
+  resizeCanvas(windowWidth, 300);
+}
+
+// Helper: get the canvas DOM element reliably across p5 versions
+function hideCanvas()   { document.querySelector('canvas').style.display = 'none'; }
+function showCanvas()   { document.querySelector('canvas').style.display = 'block'; }
 
 function draw() {
   // Sky background
@@ -95,6 +103,7 @@ function draw() {
   // Egg ends when creature exits right side
   if (creatureX > width + 150) {
     activeCreature = null;
+    hideCanvas();   // hide canvas again until next easter egg
   }
 }
 

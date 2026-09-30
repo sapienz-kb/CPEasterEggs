@@ -8,4 +8,5 @@
              border-radius: 6px; cursor: pointer; }
     #result { margin-top: 14px; font-size: 20px; color: #444; }
     /* Canvas sits below the calculator via absolute positioning */
-    canvas {  margin-top: 12px; display:none }
+    /* Canvas is hidden by default; shown only while an easter-egg creature plays */
+    canvas {  margin-top: 12px; width: 100%; display: none }
