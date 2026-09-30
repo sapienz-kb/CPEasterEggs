@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/p5@2.3.2/lib/p5.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5.sound@0.4.1/dist/p5.sound.min.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8" />
+
+  </head>
+  <body>
+    <!-- ═══════════════════════════════════════════════
+         THE BORING PART – a simple calculator
+         ═══════════════════════════════════════════════ -->
+    <div id="calc">
+      <input id="display" type="text" readonly>
+      <br><br>
+      <button class="btn" onclick="pressBtn('7')">7</button>
+      <button class="btn" onclick="pressBtn('8')">8</button>
+      <button class="btn" onclick="pressBtn('9')">9</button>
+      <button class="btn" onclick="pressBtn('/')">÷</button>
+      <br>
+      <button class="btn" onclick="pressBtn('4')">4</button>
+      <button class="btn" onclick="pressBtn('5')">5</button>
+      <button class="btn" onclick="pressBtn('6')">6</button>
+      <button class="btn" onclick="pressBtn('*')">×</button>
+      <br>
+      <button class="btn" onclick="pressBtn('1')">1</button>
+      <button class="btn" onclick="pressBtn('2')">2</button>
+      <button class="btn" onclick="pressBtn('3')">3</button>
+      <button class="btn" onclick="pressBtn('-')">−</button>
+      <br>
+      <button class="btn" onclick="pressBtn('0')">0</button>
+      <button class="btn" onclick="pressBtn('+')">+</button>
+      <button class="btn" onclick="pressBtn('C')">C</button>
+      <button class="btn" onclick="calculate()" style="background:#e94560;color:#fff;">=</button>
+    </div>
+    
+    <p style="margin-top:12px;font-size:13px;color:#888;">
+      Tast et regnestykke, eller bare et tal - og tryk Enter.
+    </p>
+    <script src="sketch.js"></script>
+  </body>
+</html>

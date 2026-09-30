@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>To-Do – secret confetti</title>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+  <h1>📋 My To-Do List</h1>
+  <div id="todo-area"></div>
+  <input id="new-item" placeholder="Add a task…" onkeydown="if(event.key==='Enter')addTask()">
+  <button onclick="addTask()">Add</button>
+  <p id="hint" style="color:#999;font-size:13px;margin-top:8px;">
+    Complete ALL tasks and see what happens…
+  </p>
+
+  <!-- ═══════════════════════════════════════════
+     EASTER EGG: when every task is checked,
+     confetti explodes + a tiny robot does a
+     victory lap around the canvas.
+     ═══════════════════════════════════════════ -->
+
+  <script src="sketch.js"></script>
+</body>
+
+</html>
