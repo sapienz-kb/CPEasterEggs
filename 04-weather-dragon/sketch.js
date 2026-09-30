@@ -6,6 +6,7 @@ let knownCities = {
   "tokyo":    { temp: 22, icon: "⛅", desc: "Partly cloudy" },
   "new york": { temp: 8,  icon: "❄️", desc: "Snow flurries" },
   "cairo":    { temp: 34, icon: "☀️", desc: "Hot and clear" },
+  "allerød":    { temp: 26, icon: "☀️", desc: "Hot and clear" },
 };
 
 function checkWeather() {
@@ -100,6 +101,7 @@ function draw() {
 /* ── LITTLE DRAWING HELPERS ───────────────────── */
 
 function drawDragon(x, y) {
+//    debugger;
   push();
   translate(x, y);
   let wingFlap = sin(creatureTimer * 0.15) * 20;
