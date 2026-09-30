@@ -70,7 +70,7 @@ function draw() {
     }
   }
 
-  if (activeCreature === "penguins") {
+  if (activeCreature === "penguins" || activeCreature === "penguin") {
     creatureX += 1.5;
     // Three penguins waddling
     for (let i = 0; i < 3; i++) {
