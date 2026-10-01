@@ -1,5 +1,5 @@
 
-/* ── BORING PART: just a text area ────────────── */
+/* ── SIMPET DEL: bare en tekstboks ────────────── */
 let notesEl = document.getElementById("notes");
 let textToRender = "Type your notes here…";
 
@@ -8,17 +8,17 @@ notesEl.addEventListener("input", function() {
   checkForEgg();
 });
 
-/* ── EASTER EGG: KONAMI WAVE ──────────────────── */
+/* ── EASTER EGG: CODINGPIRATES-BØLGE ──────────────────── */
 let eggActive = false;
 let eggTimer = 0;
-const EGG_DURATION = 120;   // frames (~2 seconds at 60fps)
+const EGG_DURATION = 120;   // frames (~2 sekunder ved 60fps)
 let sparkles = [];
 
 function checkForEgg() {
-  if (notesEl.value.toLowerCase().includes("konami")) {  // uafhængigt af store/små bogstaver: skriv konami
+  if (notesEl.value.toLowerCase().includes("codingpirates")) {  // uafhængigt af store/små bogstaver: skriv codingpirates
     triggerWave();
-    // Remove the trigger word so it doesn't re-fire on every keystroke
-    notesEl.value = notesEl.value.replace(/konami/gi, "");  // fjern ordet så det ikke udløses igen
+    // Fjern udløsningsordet så det ikke udløses ved hvert tastetryk
+    notesEl.value = notesEl.value.replace(/codingpirates/gi, "");  // fjern ordet så det ikke udløses igen
     textToRender = notesEl.value;
   }
 }
@@ -33,7 +33,7 @@ function triggerWave() {
       y: random(height),
       size: random(3, 8),
       speed: random(1, 3),
-      hue: random(260, 320)   // purple / magic range
+      hue: random(260, 320)   // lilla / magisk spektrum
     });
   }
 }
@@ -46,7 +46,7 @@ function setup() {
 function draw() {
   background(253, 246, 227);
 
-  // ── Render the text (with optional wave) ──
+  // ── Render teksten (med evt. bølge) ──
   let chars = textToRender.split("");
   let x = 30;
   let y = 60;
@@ -56,14 +56,14 @@ function draw() {
   for (let i = 0; i < chars.length; i++) {
     let offsetY = 0;
     if (eggActive) {
-      // Each character bounces with a phase offset → wave
+      // Hvert tegn hopper med faseforskel → bølge
       let phase = i * 0.4;  // faseforskel pr. bogstav → bølge
       let progress = eggTimer / EGG_DURATION;
-      let envelope = sin(progress * PI);   // 0→1→0, smooth in/out
+      let envelope = sin(progress * PI);   // 0→1→0, blid ind/ud
       offsetY = sin(phase + eggTimer * 0.15) * 18 * envelope;  // den faktiske lodrette bevægelse
     }
 
-    // Colour: normal dark, or glowing purple during egg
+    // Farve: normalt mørk, eller glødende lilla under egg'et
     if (eggActive) {
       let glow = sin(i * 0.3 + eggTimer * 0.1) * 0.5 + 0.5;  // animeret 0..1 glød pr. bogstav
       fill(120 + glow * 80, 60 + glow * 40, 200 + glow * 55);
@@ -74,11 +74,11 @@ function draw() {
     text(chars[i], x, y + offsetY);
     x += textWidth(chars[i]) + 1;
 
-    // Line wrap (simple)
+    // Linjeskift (simpelt)
     if (x > width - 40) { x = 30; y += 30; }
   }
 
-  // ── Sparkles during the egg ──
+  // ── Gnister under easteregg'et ──
   if (eggActive) {
     eggTimer++;
     for (let s of sparkles) {
@@ -86,7 +86,7 @@ function draw() {
       let alpha = map(eggTimer, 0, EGG_DURATION, 200, 0);  // gnisterne forsvinder over tid
       fill(200, 160, 255, alpha);
       noStroke();
-      // Draw a 4-point star
+      // Tegn en 4-punkts stjerne
       push();
       translate(s.x, s.y);
       rotate(eggTimer * 0.05);
@@ -99,7 +99,7 @@ function draw() {
       pop();
     }
     if (eggTimer >= EGG_DURATION) {
-      eggActive = false;   // back to normal
+      eggActive = false;   // tilbage til normaltilstand
     }
   }
 }

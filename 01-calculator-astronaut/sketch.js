@@ -1,5 +1,5 @@
 
-/* ── KEDELIG LOMMEREGNER LOGIK ───────────────────── */
+/* ── SIMPEL REGNELOGIK ───────────────────── */
 let inputStr = "";  // brugerens inddata som en streng
 let display = document.getElementById("display");
 
@@ -23,7 +23,7 @@ function calculate() {
 // Sæt event listener på tastaturtryk:
 display.addEventListener("keydown", function(e) {  // lyt efter tastetryk på displayfeltet
   if (e.key === "Enter") {
-    // ── CHECK FOR THE EASTER EGG BEFORE CALCULATING ──
+    // ── TJEK FOR EASTER EGG FØR BEREGNING ──
     if (inputStr === "123456") {
       triggerAstronaut();
       display.value = "SPACEMAN!";
@@ -58,7 +58,7 @@ function setup() {
 }
 
 function draw() {
-  // ── Draw the astronaut if the egg is active ──
+  // ── Tegn astronauten hvis egg'et er aktivt ──
   if (astronautActive) {
     background(10, 10, 30, 40);  // ghost-effekt efter ham
 
@@ -78,7 +78,7 @@ function draw() {
 
     drawAstronaut(astroX, height / 2);
 
-    // Leave a tiny trail of stars behind
+    // Lad et lille stjernespore efter
     if (astroStep % 3 === 0) {
       fill(255, 255, 200, 120);
       noStroke();
@@ -93,7 +93,7 @@ function draw() {
   }
 }
 
-// En lille astronaut lavet af cirkler og firkanter:
+// En lille astronaut lavet af cirkler og firkanter, det kunne også have været et billede eller en sprite:
 function drawAstronaut(x, y) {
   push();
   translate(x, y);
@@ -101,34 +101,34 @@ function drawAstronaut(x, y) {
   let bob = sin(frameCount * 0.15) * 4;   // svæver op og ned
   translate(0, bob);
 
-  // Backpack
+  // Rygsæk
   fill(180, 180, 200);
   noStroke();
   rect(-18, -10, 10, 24, 3);
 
-  // Body
+  // Krop
   fill(230, 230, 240);
   rect(-12, -12, 24, 28, 5);
 
-  // Helmet (big circle)
+  // Hjelm (stor cirkel)
   fill(200, 220, 255);
   stroke(255, 255, 255);
   strokeWeight(2);
   circle(0, -18, 28);
 
-  // Visor
+  // Visir
   noFill();
   stroke(100, 140, 200);
   strokeWeight(3);
   arc(0, -18, 20, 20, 0, PI);
 
-  // Eyes (two little dots)
+  // Øjne (to små prikker)
   noStroke();
   fill(30, 30, 50);
   circle(-4, -19, 4);
   circle(4, -19, 4);
 
-  // Legs (wiggly)
+  // Ben (vuggende)
   stroke(230, 230, 240);
   strokeWeight(4);
   noFill();

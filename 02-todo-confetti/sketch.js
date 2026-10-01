@@ -1,5 +1,5 @@
 
-/* ── BORING TO-DO LOGIC ────────────────────────── */
+/* ── SIMPEL TO-DO LOGIK ────────────────────────── */
 let tasks = [
   { text: "Feed the cat", done: false },
   { text: "Do homework",  done: false },
@@ -16,7 +16,7 @@ function renderTasks() {
     span.onclick = function() { toggleTask(i); };  // klik for at markere/afmarkere
     area.appendChild(span);
   });
-  checkAllDone();   // ← this is where the egg can fire
+  checkAllDone();   // ← her kan easteregg'et udløses
 }
 
 function addTask() {
@@ -34,13 +34,13 @@ function toggleTask(i) {
 }
 
 function checkAllDone() {
-  let allDone = tasks.every(function(t) { return t.done; });  // true når alle opgaver er krydret af
+  let allDone = tasks.every(function(t) { return t.done; });  // true når alle opgaver er krydset af
   if (allDone && tasks.length > 0 && !celebrating) {
     triggerConfetti();
   }
 }
 
-/* ── EASTER EGG: CONFETTI + ROBOT VICTORY LAP ──── */
+/* ── EASTER EGG: KONFETTI + ROBOTS SEJRRUNDE ──── */
 let celebrating = false;
 let confettiParts = [];
 let robotAngle = 0;
@@ -78,11 +78,11 @@ function draw() {
 
   robotTimer++;
 
-  // ── Confetti particles ──
+  // ── Konfetti-partikler ──
   for (let p of confettiParts) {
     p.x += p.vx;
     p.y += p.vy;
-    p.vy += 0.25;       // gravity
+    p.vy += 0.25;       // tyngdekraft
     p.rot += p.spin * 60;
     p.life--;
 
@@ -100,7 +100,7 @@ function draw() {
     }
   }
 
-  // ── Robot victory lap (goes around the canvas border) ──
+  // ── Robots sejrrunde (kører rundt om canvas-kanten) ──
   if (robotTimer < 300) {
     robotAngle += 0.02;  // roter langsomt rundt om canvas
     let rx = width  / 2 + cos(robotAngle) * (width  / 2 - 40);  // parametrisk cirkel for robotens bane
@@ -108,7 +108,7 @@ function draw() {
     drawRobot(rx, ry, robotAngle + HALF_PI);
   }
 
-  // ── "ALL DONE!" text ──
+  // ── "ALL DONE!"-tekst ──
   if (robotTimer < 300) {
     fill(74, 144, 217);
     textAlign(CENTER);
@@ -118,35 +118,35 @@ function draw() {
     fill(74, 144, 217, alpha);
     text("★ ALL DONE! ★", width / 2, height / 2);
   } else {
-    celebrating = false;   // egg is over, app returns to normal
+    celebrating = false;   // egg'et er slut, appen vender tilbage til normaltilstand
   }
 }
 
-// A small blocky robot
+// En lille kasseformet robot
 function drawRobot(x, y, angle) {
   push();
   translate(x, y);
   rotate(angle);
 
-  // Body
+  // Krop
   fill(100, 160, 230);
   noStroke();
   rect(-10, -8, 20, 18, 3);
-  // Head
+  // Hoved
   fill(160, 200, 240);
   rect(-8, -20, 16, 12, 2);
-  // Eyes
+  // Øjne
   fill(255);
   circle(-3, -14, 4);
   circle(3, -14, 4);
-  // Antenna
+  // Antenne
   stroke(100, 160, 230);
   strokeWeight(2);
   line(0, -20, 0, -26);
   fill(255, 100, 100);
   noStroke();
   circle(0, -27, 4);
-  // Wheels
+  // Hjul
   fill(60);
   circle(-7, 12, 6);
   circle(7, 12, 6);
@@ -154,5 +154,5 @@ function drawRobot(x, y, angle) {
   pop();
 }
 
-// Initial render
+// Første rendering
 renderTasks();
