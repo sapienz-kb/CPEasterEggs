@@ -10,7 +10,7 @@ let knownCities = {
 };
 
 function checkWeather() {
-  let city = document.getElementById("city").value.trim().toLowerCase();
+  let city = document.getElementById("city").value.trim().toLowerCase();  // normalisér indtastning: trim + småbogstaver
   let resultEl = document.getElementById("result");
 
   // ── CHECK FOR SECRET CITIES FIRST ──
@@ -19,7 +19,7 @@ function checkWeather() {
   if (city === "cloud")    { resultEl.textContent = "☁️ 1000% clouds. Hydrate.";     triggerCreature("cloud");    return; }
 
   // Normal lookup
-  if (knownCities[city]) {
+  if (knownCities[city]) {  // slå op i den hardkodede tabel
     let w = knownCities[city];
     resultEl.textContent = w.icon + " " + city + ": " + w.temp + "°C, " + w.desc;
   } else {
@@ -56,7 +56,7 @@ function draw() {
   let skyTop = color(135, 190, 240);
   let skyBot = color(200, 225, 250);
   for (let y = 0; y < height; y++) {
-    stroke(lerpColor(skyTop, skyBot, y / height));
+    stroke(lerpColor(skyTop, skyBot, y / height));  // lodret gradient i himlen
     line(0, y, width, y);
   }
   noStroke();
@@ -71,11 +71,11 @@ function draw() {
 
   if (activeCreature === "dragon") {
     creatureX += 3;
-    drawDragon(creatureX, height / 2 + sin(creatureTimer * 0.06) * 30);
+    drawDragon(creatureX, height / 2 + sin(creatureTimer * 0.06) * 30);  // sinus-bane op og ned
     // Fire breath particles
     if (creatureTimer % 4 === 0) {
       fill(255, random(100, 180), 0, 150);
-      circle(creatureX - 30, height / 2 + sin(creatureTimer * 0.06) * 30 + random(-8, 8), random(4, 10));
+      circle(creatureX - 30, height / 2 + sin(creatureTimer * 0.06) * 30 + random(-8, 8), random(4, 10));  // ildpartikler bag dragen
     }
   }
 
@@ -84,14 +84,14 @@ function draw() {
     // Three penguins waddling
     for (let i = 0; i < 3; i++) {
       let px = creatureX - i * 35;
-      let waddle = sin(creatureTimer * 0.12 + i * 1.5) * 3;
+      let waddle = sin(creatureTimer * 0.12 + i * 1.5) * 3;  // hver pinguin vugger med forskellig fase
       drawPenguin(px, height - 55, waddle);
     }
   }
 
   if (activeCreature === "cloud") {
     creatureX += 1.2;
-    let puff = sin(creatureTimer * 0.04) * 5;
+    let puff = sin(creatureTimer * 0.04) * 5;  // blid op/ned bevægelse
     drawBigCloud(creatureX, 80 + puff);
     // Little rain drops
     if (creatureTimer % 6 === 0) {
@@ -113,7 +113,7 @@ function drawDragon(x, y) {
 //    debugger;
   push();
   translate(x, y);
-  let wingFlap = sin(creatureTimer * 0.15) * 20;
+  let wingFlap = sin(creatureTimer * 0.15) * 20;  // vingeflommen
 
   // Wings
   fill(180, 60, 60);
@@ -158,7 +158,7 @@ function drawDragon(x, y) {
 function drawPenguin(x, y, waddle) {
   push();
   translate(x, y);
-  rotate(radians(waddle));
+  rotate(radians(waddle));  // let skævhed til vugge-effekten
 
   // Body
   fill(40, 40, 50);

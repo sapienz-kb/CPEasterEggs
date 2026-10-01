@@ -9,11 +9,11 @@ let tasks = [
 function renderTasks() {
   let area = document.getElementById("todo-area");
   area.innerHTML = "";
-  tasks.forEach(function(t, i) {
+  tasks.forEach(function(t, i) {  // render hver enkelt opgave
     let span = document.createElement("span");
     span.className = "todo-item" + (t.done ? " done" : "");
-    span.textContent = (t.done ? "✓ " : "○ ") + t.text;
-    span.onclick = function() { toggleTask(i); };
+    span.textContent = (t.done ? "✓ " : "○ ") + t.text;  // flueben eller cirkel foran teksten
+    span.onclick = function() { toggleTask(i); };  // klik for at markere/afmarkere
     area.appendChild(span);
   });
   checkAllDone();   // ← this is where the egg can fire
@@ -34,7 +34,7 @@ function toggleTask(i) {
 }
 
 function checkAllDone() {
-  let allDone = tasks.every(function(t) { return t.done; });
+  let allDone = tasks.every(function(t) { return t.done; });  // true når alle opgaver er krydret af
   if (allDone && tasks.length > 0 && !celebrating) {
     triggerConfetti();
   }
@@ -50,12 +50,12 @@ function triggerConfetti() {
   celebrating = true;
   robotTimer = 0;
   confettiParts = [];
-  for (let i = 0; i < 120; i++) {
+  for (let i = 0; i < 120; i++) {  // opret 120 konfetti-dele
     confettiParts.push({
       x: width / 2,
       y: height / 2,
-      vx: random(-8, 8),
-      vy: random(-12, -2),
+      vx: random(-8, 8),  // tilfældig vandret hastighed
+      vy: random(-12, -2),  // oprindelig opadgående hastighed
       hue: random(360),
       size: random(4, 10),
       spin: random(-0.2, 0.2),
@@ -102,8 +102,8 @@ function draw() {
 
   // ── Robot victory lap (goes around the canvas border) ──
   if (robotTimer < 300) {
-    robotAngle += 0.02;
-    let rx = width  / 2 + cos(robotAngle) * (width  / 2 - 40);
+    robotAngle += 0.02;  // roter langsomt rundt om canvas
+    let rx = width  / 2 + cos(robotAngle) * (width  / 2 - 40);  // parametrisk cirkel for robotens bane
     let ry = height / 2 + sin(robotAngle) * (height / 2 - 30);
     drawRobot(rx, ry, robotAngle + HALF_PI);
   }
@@ -114,7 +114,7 @@ function draw() {
     textAlign(CENTER);
     textSize(36);
     textStyle(BOLD);
-    let alpha = map(robotTimer, 0, 300, 255, 0);
+    let alpha = map(robotTimer, 0, 300, 255, 0);  // ud-fade teksten over tid
     fill(74, 144, 217, alpha);
     text("★ ALL DONE! ★", width / 2, height / 2);
   } else {

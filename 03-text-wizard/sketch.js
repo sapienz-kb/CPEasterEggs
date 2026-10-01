@@ -4,7 +4,7 @@ let notesEl = document.getElementById("notes");
 let textToRender = "Type your notes here…";
 
 notesEl.addEventListener("input", function() {
-  textToRender = notesEl.value || "…";
+  textToRender = notesEl.value || "…";  // spejl textarea-indholdet til canvas
   checkForEgg();
 });
 
@@ -15,10 +15,10 @@ const EGG_DURATION = 120;   // frames (~2 seconds at 60fps)
 let sparkles = [];
 
 function checkForEgg() {
-  if (notesEl.value.toLowerCase().includes("konami")) {
+  if (notesEl.value.toLowerCase().includes("konami")) {  // uafhængigt af store/små bogstaver: skriv konami
     triggerWave();
     // Remove the trigger word so it doesn't re-fire on every keystroke
-    notesEl.value = notesEl.value.replace(/konami/gi, "");
+    notesEl.value = notesEl.value.replace(/konami/gi, "");  // fjern ordet så det ikke udløses igen
     textToRender = notesEl.value;
   }
 }
@@ -57,15 +57,15 @@ function draw() {
     let offsetY = 0;
     if (eggActive) {
       // Each character bounces with a phase offset → wave
-      let phase = i * 0.4;
+      let phase = i * 0.4;  // faseforskel pr. bogstav → bølge
       let progress = eggTimer / EGG_DURATION;
       let envelope = sin(progress * PI);   // 0→1→0, smooth in/out
-      offsetY = sin(phase + eggTimer * 0.15) * 18 * envelope;
+      offsetY = sin(phase + eggTimer * 0.15) * 18 * envelope;  // den faktiske lodrette bevægelse
     }
 
     // Colour: normal dark, or glowing purple during egg
     if (eggActive) {
-      let glow = sin(i * 0.3 + eggTimer * 0.1) * 0.5 + 0.5;
+      let glow = sin(i * 0.3 + eggTimer * 0.1) * 0.5 + 0.5;  // animeret 0..1 glød pr. bogstav
       fill(120 + glow * 80, 60 + glow * 40, 200 + glow * 55);
     } else {
       fill(60, 50, 40);
@@ -83,7 +83,7 @@ function draw() {
     eggTimer++;
     for (let s of sparkles) {
       s.y -= s.speed;
-      let alpha = map(eggTimer, 0, EGG_DURATION, 200, 0);
+      let alpha = map(eggTimer, 0, EGG_DURATION, 200, 0);  // gnisterne forsvinder over tid
       fill(200, 160, 255, alpha);
       noStroke();
       // Draw a 4-point star

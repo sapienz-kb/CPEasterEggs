@@ -1,17 +1,17 @@
 
-/* ── BORING CALCULATOR LOGIC ───────────────────── */
-let inputStr = "";
+/* ── KEDELIG LOMMEREGNER LOGIK ───────────────────── */
+let inputStr = "";  // brugerens inddata som en streng
 let display = document.getElementById("display");
 
-function pressBtn(ch) {
+function pressBtn(ch) {  // kaldes når en knap trykkes
   if (ch === "C") { inputStr = ""; display.value = ""; return; }
-  inputStr += ch;
+  inputStr += ch;  // tilføj tegnet til udtrykket
   display.value = inputStr;
 }
 
 function calculate() {
   try {
-    let result = eval(inputStr);
+    let result = eval(inputStr);  // beregn udtrykket (ok til en demo)
     display.value = result;
     inputStr = "";
   } catch(e) {
@@ -21,7 +21,7 @@ function calculate() {
 }
 
 // Sæt event listener på tastaturtryk:
-display.addEventListener("keydown", function(e) {
+display.addEventListener("keydown", function(e) {  // lyt efter tastetryk på displayfeltet
   if (e.key === "Enter") {
     // ── CHECK FOR THE EASTER EGG BEFORE CALCULATING ──
     if (inputStr === "123456") {
@@ -42,8 +42,8 @@ display.addEventListener("keydown", function(e) {
 });
 
 /* ── EASTER EGG: En rummand går hen over skærmen! ── */
-let astronautActive = false;
-let astroX = -60;
+let astronautActive = false;  // om astronaut-animationen kører
+let astroX = -60;  // X-position (starter uden for skærmen)
 let astroStep = 0;
 
 function triggerAstronaut() {
@@ -53,7 +53,7 @@ function triggerAstronaut() {
 }
 
 function setup() {
-  createCanvas(windowWidth, windowHeight - 320);
+  createCanvas(windowWidth, windowHeight - 320);  // canvas med fuld bredde, plads til formularen
   background(10, 10, 30);
 }
 
@@ -64,7 +64,7 @@ function draw() {
 
     // tegn stjerner:
     for (let i = 0; i < 40; i++) {
-      let sx = noise(i * 0.3) * width;
+      let sx = noise(i * 0.3) * width;  // Perlin-noise giver organiske stjernepositioner
       let sy = noise(i * 0.3 + 100) * height;
       let bright = 150 + noise(i, frameCount * 0.01) * 105;
       fill(bright, bright, bright, 180);
@@ -73,7 +73,7 @@ function draw() {
     }
 
     document.querySelector('canvas').style.display = "block";
-    astroX += 2.5;
+    astroX += 2.5;  // flyt astronauten til højre hver frame
     astroStep++;
 
     drawAstronaut(astroX, height / 2);
@@ -86,7 +86,7 @@ function draw() {
     }
 
     // Når atronauten kommer over i højre side, så er easteregg'et slut:
-    if (astroX > width + 60) {
+    if (astroX > width + 60) {  // ude af skærmen til højre, egg'et er slut
       astronautActive = false;
       pressBtn('C');
     }
@@ -132,7 +132,7 @@ function drawAstronaut(x, y) {
   stroke(230, 230, 240);
   strokeWeight(4);
   noFill();
-  let legSwing = sin(frameCount * 0.2) * 5;
+  let legSwing = sin(frameCount * 0.2) * 5;  // benene vugger frem og tilbage
   line(-6, 16, -8 + legSwing, 28);
   line(6, 16, 8 - legSwing, 28);
 
